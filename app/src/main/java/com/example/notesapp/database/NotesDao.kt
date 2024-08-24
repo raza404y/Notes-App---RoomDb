@@ -21,8 +21,10 @@ interface NotesDao {
     suspend fun delete(notes: Notes)
 
     @Query("select * from notes_table order by id desc")
-     fun getAllNotes():LiveData<List<Notes>>
+    fun getAllNotes(): LiveData<List<Notes>>
 
+    @Query("select * from notes_table where Title like:query")
+    fun searchNote(query: String): LiveData<List<Notes>>
 
 
 }

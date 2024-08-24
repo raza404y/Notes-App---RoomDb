@@ -19,7 +19,9 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
     init {
         val dao = NotesDatabase.createDatabase(application).getNotesDao()
         repository = Repository(dao)
-        notesList = repository.getAllNotes()
+        viewModelScope.launch(Dispatchers.IO) {
+            notesList = repository.getAllNotes()
+        }
     }
 
     fun insert(notes: Notes, inserted: () -> Unit) = viewModelScope.launch(Dispatchers.IO) {
@@ -29,18 +31,27 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun delete(notes: Notes,Deleted:()->Unit) = viewModelScope.launch(Dispatchers.IO) {
+    fun delete(notes: Notes, onDeleted: () -> Unit) = viewModelScope.launch(Dispatchers.IO) {
         repository.delete(notes)
-        withContext(Dispatchers.Main){
+        withContext(Dispatchers.Main) {
             Delete()
         }
     }
 
-    fun update(notes: Notes,Updated:()->Unit) = viewModelScope.launch(Dispatchers.IO) {
+    fun update(notes: Notes, Updated: () -> Unit) = viewModelScope.launch(Dispatchers.IO) {
         repository.update(notes)
-        withContext(Dispatchers.Main){
+        withContext(Dispatchers.Main) {
             Updated()
         }
     }
+
+    fun searchNote(query: String): LiveData<List<Notes>> {
+        return if (query.isEmpty()) {
+            repository.getAllNotes() // return the full list if query is empty
+        } else {
+            repository.searchNote(query)
+        }
+    }
+
 
 }

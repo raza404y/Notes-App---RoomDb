@@ -49,25 +49,25 @@ class AddNotesFragment : Fragment() {
         val title = binding.noteTitleET.text.toString().trim()
         val noteText = binding.noteET.text.toString().trim()
 
-        when {
-            title.isEmpty() -> showToast("Title is missing")
-            noteText.isEmpty() -> showToast("Note is missing")
-        }
-        val simpleDateFormat = SimpleDateFormat("E, dd MMM yyyy HH:mm:ss a", Locale.getDefault())
-        val currentDateTime = simpleDateFormat.format(Date())
-        val notes = Notes(
-            noteTitle = title,
-            note = noteText,
-            dateTime = currentDateTime
-        )
-        viewModel.insert(notes) {
-            showToast("Note Inserted")
-            navController.navigateUp()
-            binding.noteTitleET.setText("")
-            binding.noteET.setText("")
-        }
-
-
+       if (title.isEmpty()) {
+           showToast("Title is missing")
+       }else if (noteText.isEmpty()){
+            showToast("Note is missing")
+        }else {
+           val simpleDateFormat = SimpleDateFormat("E, dd MMM yyyy HH:mm:ss a", Locale.getDefault())
+           val currentDateTime = simpleDateFormat.format(Date())
+           val notes = Notes(
+               noteTitle = title,
+               note = noteText,
+               dateTime = currentDateTime
+           )
+           viewModel.insert(notes) {
+               showToast("Note Inserted")
+               navController.navigateUp()
+               binding.noteTitleET.setText("")
+               binding.noteET.setText("")
+           }
+       }
     }
 
     private fun showToast(message: String) {
