@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/notesFragment">
+
+    <fragment
+        android:id="@+id/notesFragment"
+        android:name="com.example.notesapp.ui.NotesFragment"
+        android:label="fragment_notes"
+        tools:layout="@layout/fragment_notes" >
+        <action
+            android:id="@+id/action_notesFragment_to_addNotesFragment"
+            app:destination="@id/addNotesFragment" />
+        <action
+            android:id="@+id/action_notesFragment_to_readAndUpdateFragment"
+            app:destination="@id/readAndUpdateFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addNotesFragment"
+        android:name="com.example.notesapp.ui.AddNotesFragment"
+        android:label="fragment_add_notes"
+        tools:layout="@layout/fragment_add_notes" />
+    <fragment
+        android:id="@+id/readAndUpdateFragment"
+        android:name="com.example.notesapp.ui.ReadAndUpdateFragment"
+        android:label="fragment_read_and_update"
+        tools:layout="@layout/fragment_read_and_update" >
+        <argument
+            android:name="MyNotes"
+            app:argType="com.example.notesapp.database.Notes" />
+    </fragment>
+</navigation>
