@@ -50,10 +50,10 @@ class ReadAndUpdateFragment : Fragment() {
                 note.noteTitle = noteTitle
                 note.note = noteText
                 viewModel.update(note){
+                    showToast("Note Updated")
+                    navController.navigateUp()
                     binding.noteTitleET.setText("")
                     binding.noteET.setText("")
-                    navController.navigateUp()
-                    showToast("Note Updated")
                 }
 
             }

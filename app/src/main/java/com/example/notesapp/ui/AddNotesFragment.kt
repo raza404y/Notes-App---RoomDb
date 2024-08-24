@@ -61,10 +61,10 @@ class AddNotesFragment : Fragment() {
             dateTime = currentDateTime
         )
         viewModel.insert(notes) {
+            showToast("Note Inserted")
+            navController.navigateUp()
             binding.noteTitleET.setText("")
             binding.noteET.setText("")
-            navController.navigateUp()
-            showToast("Note Inserted")
         }
 
 
