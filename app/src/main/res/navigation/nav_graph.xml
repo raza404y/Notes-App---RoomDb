@@ -12,16 +12,34 @@
         tools:layout="@layout/fragment_notes" >
         <action
             android:id="@+id/action_notesFragment_to_addNotesFragment"
-            app:destination="@id/addNotesFragment" />
+            app:destination="@id/addNotesFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_notesFragment_to_readAndUpdateFragment"
-            app:destination="@id/readAndUpdateFragment" />
+            app:destination="@id/readAndUpdateFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
+
     <fragment
         android:id="@+id/addNotesFragment"
         android:name="com.example.notesapp.ui.AddNotesFragment"
         android:label="fragment_add_notes"
-        tools:layout="@layout/fragment_add_notes" />
+        tools:layout="@layout/fragment_add_notes" >
+        <action
+            android:id="@+id/action_addNotesFragment_to_notesFragment"
+            app:destination="@id/notesFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left" />
+    </fragment>
+
     <fragment
         android:id="@+id/readAndUpdateFragment"
         android:name="com.example.notesapp.ui.ReadAndUpdateFragment"
@@ -30,5 +48,13 @@
         <argument
             android:name="MyNotes"
             app:argType="com.example.notesapp.database.Notes" />
+        <action
+            android:id="@+id/action_readAndUpdateFragment_to_notesFragment"
+            app:destination="@id/notesFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left" />
     </fragment>
+
 </navigation>
